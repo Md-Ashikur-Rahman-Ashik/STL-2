@@ -51,8 +51,15 @@ int main()
 
     int firstValue = 6, secondValue = 8;
     auto firstLowerBound = mapOfSet.lower_bound(firstValue);
-    if(firstLowerBound != mapOfSet.end()){
+    if (firstLowerBound != mapOfSet.end())
+    {
         int integerValue = firstLowerBound->first;
+        auto secondLowerBound = mapOfSet[integerValue].lower_bound(secondValue);
+
+        if (secondLowerBound != mapOfSet[integerValue].end())
+        {
+            cout << *secondLowerBound << "\n";
+        }
     }
 
     return 0;
