@@ -3,11 +3,14 @@ using namespace std;
 
 int main()
 {
-    int multiSetSize, queries;
-    cin >> multiSetSize >> queries;
-    multiset<int> integerSet;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
 
-    for (int i = 0; i < multiSetSize; i++)
+    int setSize, queries;
+    cin >> setSize >> queries;
+
+    multiset<int> integerSet;
+    for (int i = 0; i < setSize; i++)
     {
         int inputValue;
         cin >> inputValue;
@@ -18,25 +21,16 @@ int main()
     {
         int inputValue;
         cin >> inputValue;
-
-        auto it = integerSet.lower_bound(inputValue);
-        if (*it >= inputValue)
+        auto it = integerSet.upper_bound(inputValue);
+        if (it == integerSet.begin())
         {
-            auto anotherIT = --it;
-            if (anotherIT != integerSet.begin())
-            {
-                cout << *anotherIT << "\n";
-                integerSet.erase(anotherIT);
-            }
-            else
-            {
-                cout << *++anotherIT << "\n";
-                integerSet.erase(anotherIT);
-            }
+            cout << -1 << "\n";
         }
         else
         {
-            cout << -1 << "\n";
+            it--;
+            cout << *it << "\n";
+            integerSet.erase(it);
         }
     }
 
