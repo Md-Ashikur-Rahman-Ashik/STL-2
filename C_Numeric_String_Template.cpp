@@ -10,26 +10,26 @@ int main()
     {
         int vectorSize;
         cin >> vectorSize;
+        vector<int> integerVector(vectorSize);
+        map<int, int> integerMap;
 
-        set<int> integerSet;
         for (int i = 0; i < vectorSize; i++)
         {
-            int inputValue;
-            cin >> inputValue;
-            integerSet.insert(inputValue);
+            cin >> integerVector[i];
+            int integerValue = integerVector[i];
+            integerMap[integerValue]++;
         }
 
-        int firstSetSize = integerSet.size();
+        int numberOfString;
+        cin >> numberOfString;
 
-        int queries;
-        cin >> queries;
-
-        for (int i = 0; i < queries; i++)
+        for (int i = 0; i < numberOfString; i++)
         {
+            map<char, int> characterMap;
+
             string inputString;
             cin >> inputString;
 
-            set<char> characterSet;
             int stringSize = inputString.length();
 
             if (vectorSize != stringSize)
@@ -40,17 +40,31 @@ int main()
 
             for (int i = 0; i < stringSize; i++)
             {
-                characterSet.insert(inputString[i]);
+                char individualCharacter = inputString[i];
+                characterMap[individualCharacter]++;
             }
 
-            int secondSetSize = characterSet.size();
-            if (firstSetSize != secondSetSize)
+            bool flag = true;
+
+            for (int i = 0; i < vectorSize; i++)
             {
-                cout << "NO\n";
+                int integerValue = integerVector[i];
+                char characterValue = inputString[i];
+
+                if (integerMap[integerValue] != characterMap[characterValue])
+                {
+                    flag = false;
+                    break;
+                }
+            }
+
+            if (flag == true)
+            {
+                cout << "YES\n";
             }
             else
             {
-                cout << "YES\n";
+                cout << "NO\n";
             }
         }
     }
