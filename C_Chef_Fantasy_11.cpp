@@ -21,9 +21,14 @@ int main()
         vector<string> stringVector;
         stringVector.push_back(finalString);
 
+        map<string, int> stringMap;
+
         while (next_permutation(finalString.begin(), finalString.end()))
         {
-            stringVector.push_back(finalString);
+            if (stringMap[finalString] == 0)
+            {
+                stringVector.push_back(finalString);
+            }
         }
 
         int vectorSize = stringVector.size();
