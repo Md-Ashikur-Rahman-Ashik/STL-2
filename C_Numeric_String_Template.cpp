@@ -11,13 +11,11 @@ int main()
         int vectorSize;
         cin >> vectorSize;
         vector<int> integerVector(vectorSize);
-        map<int, int> integerMap;
 
         for (int i = 0; i < vectorSize; i++)
         {
             cin >> integerVector[i];
             int integerValue = integerVector[i];
-            integerMap[integerValue]++;
         }
 
         int numberOfString;
@@ -25,7 +23,8 @@ int main()
 
         for (int i = 0; i < numberOfString; i++)
         {
-            map<char, int> characterMap;
+            map<int, set<char>> integerMap;
+            map<char, set<int>> characterMap;
 
             string inputString;
             cin >> inputString;
@@ -40,8 +39,11 @@ int main()
 
             for (int i = 0; i < stringSize; i++)
             {
+                int integerValue = integerVector[i];
                 char individualCharacter = inputString[i];
-                characterMap[individualCharacter]++;
+
+                integerMap[integerValue].insert(individualCharacter);
+                characterMap[individualCharacter].insert(integerValue);
             }
 
             bool flag = true;
@@ -51,7 +53,7 @@ int main()
                 int integerValue = integerVector[i];
                 char characterValue = inputString[i];
 
-                if (integerMap[integerValue] != characterMap[characterValue])
+                if (integerMap[integerValue].size() > 1 || characterMap[characterValue].size() > 1)
                 {
                     flag = false;
                     break;
