@@ -6,17 +6,41 @@ int main()
     int numberOfQueue, queries;
     cin >> numberOfQueue >> queries;
 
-    priority_queue<priority_queue<int>> nestedQueue;
+    vector<priority_queue<int>> queueVector(numberOfQueue);
 
-    for (int i = 0; i < numberOfQueue; i++)
+    while (queries--)
     {
-        string queueName = "priority";
-        queueName.push_back(i);
+        int operation;
+        cin >> operation;
 
-        priority_queue<int> queueName;
+        if (operation == 0)
+        {
+            int queueIndex, inputValue;
+            cin >> queueIndex >> inputValue;
+
+            queueVector[queueIndex].push(inputValue);
+        }
+        else if (operation == 1)
+        {
+            int queueIndex;
+            cin >> queueIndex;
+
+            if (!queueVector[queueIndex].empty())
+            {
+                cout << queueVector[queueIndex].top() << "\n";
+            }
+        }
+        else if (operation == 2)
+        {
+            int queueIndex;
+            cin >> queueIndex;
+
+            if (!queueVector[queueIndex].empty())
+            {
+                queueVector[queueIndex].pop();
+            }
+        }
     }
-    
-    
 
     return 0;
 }
